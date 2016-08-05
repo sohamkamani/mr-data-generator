@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
 
-const ChartPoint = ({x, y}) => {
+const ChartPoint = ({x, y, pointDeleted}) => {
 	return (
-		<circle cx={x} cy={y} stroke="black" strokeWidth="1" r="5" fill="tomato"></circle>
+		<circle cx={x} cy={y} stroke="black" strokeWidth="1" r="5" fill="tomato" onContextMenu={pointDeleted}></circle>
 	)
 }
 

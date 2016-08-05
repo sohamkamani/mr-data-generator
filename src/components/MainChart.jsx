@@ -21,6 +21,13 @@ const mapDispatchToProps = dispatch => ({
 			x: clientX - left,
 			y: clientY - top
 		})
+	},
+	pointDeleted: id => e => {
+		e.preventDefault()
+		dispatch({
+			type: 'DELETE_CHART_POINT',
+			id
+		})
 	}
 })
 
@@ -67,11 +74,13 @@ const MainChart = React.createClass({
 			.call(axisX)
 	},
 
+	handleContextClick: e => e.preventDefault(),
+
 	render: function () {
 		return (
-			<svg id="main-chart" className="main-chart" height="400px" width="400px" onClick={this.props.pointClicked}>
+			<svg id="main-chart" className="main-chart" height="400px" width="400px" onClick={this.props.pointClicked} onContextMenu={this.handleContextClick}	>
 				{
-			this.props.chartData.map((pointData, i) => (<ChartPoint key={i} {...pointData}/>))
+			this.props.chartData.map((pointData, i) => (<ChartPoint key={i} pointDeleted={this.props.pointDeleted(pointData.id)} {...pointData}/>))
 			}
 			</svg>
 		)
