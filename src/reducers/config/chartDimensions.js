@@ -6,7 +6,12 @@ const defaultState = {
 }
 
 const chartDimensions = (state = defaultState, action) => {
-	return state
+	switch (action.type) {
+	case 'AXIS_DIMENSION_CHANGE':
+		return Object.assign({}, state, action.axisInfo)
+	default:
+		return state
+	}
 }
 
 export default chartDimensions

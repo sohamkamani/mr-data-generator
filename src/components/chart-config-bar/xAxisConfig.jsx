@@ -5,12 +5,12 @@ const textBoxStyle = {
 	width: '50px'
 }
 
-const xAxisConfig = () => {
+const xAxisConfig = ({axisChange}) => {
 	return (
 		<div>
 			x Axis :
-			<TextField style={textBoxStyle} hintText="Start"/>
-			<TextField style={textBoxStyle} hintText="End"/>
+			<TextField style={textBoxStyle} hintText="Start" onChange={axisChange('xLower')}/>
+			<TextField style={textBoxStyle} hintText="End" onChange={axisChange('xUpper')}/>
 		</div>
 	)
 }
