@@ -8,15 +8,15 @@ import { axisLeft, axisBottom } from 'd3-axis'
 const ChartAxes = React.createClass({
 	componentDidMount() {
 		const el = ReactDom.findDOMNode(this)
-		const height = 400
-		const width = 400
+		const {height, width, chartProportion, marginProportionLeft} = this.props.chartDimensions
 
-		const chartHeight = height * 0.9
-		const chartWidth = width * 0.8
+		const chartHeight = height * chartProportion
+		const chartWidth = width * chartProportion
 		const margin = {
 			y: height - chartHeight,
 			x: width - chartWidth
 		}
+		const marginProportionRight = 1 - marginProportionLeft
 		const {xUpper=100, xLower=0, yUpper=100, yLower=0} = this.props.chartDimensions
 
 		const scaleY = scaleLinear().domain([yUpper, yLower]).range([0, chartHeight])
@@ -30,9 +30,22 @@ const ChartAxes = React.createClass({
 
 		const axisElement = d3.select(el).append('g')
 
-		axisElement.append('g').attr('transform', `translate(${margin.x / 2}, ${margin.y / 2})`).call(axisY)
+		this.yAxis = axisElement.append('g').attr('transform', `translate(${margin.x * marginProportionLeft}, ${margin.y * marginProportionRight})`).call(axisY)
 
-		axisElement.append('g').attr('transform', `translate(${margin.x / 2}, ${margin.y / 2 + chartHeight})`).call(axisX)
+		this.xAxis = axisElement.append('g').attr('transform', `translate(${margin.x * marginProportionLeft}, ${margin.y * marginProportionRight + chartHeight})`).call(axisX)
+
+		this.scaleY = scaleY
+		this.scaleX = scaleX
+	},
+	componentDidUpdate() {
+		const {xUpper=100, xLower=0, yUpper=100, yLower=0} = this.props.chartDimensions
+		const {scaleX, scaleY, xAxis, yAxis} = this
+		scaleX.domain([xLower, xUpper])
+		scaleY.domain([yUpper, yLower])
+		const axisY = axisLeft(scaleY)
+		const axisX = axisBottom(scaleX)
+		yAxis.call(axisY)
+		xAxis.call(axisX)
 	},
 	render() {
 		return (

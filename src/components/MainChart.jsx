@@ -1,13 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import ChartAxes from './ChartAxes.jsx'
+import getConvertedScales from '../utils/get-converted-scale'
 
 const offset = require('offset')
 
 import ChartPoint from './ChartPoint.jsx'
 
 const mapDispatchToProps = dispatch => ({
-	pointClicked: function(e) {
+	pointClicked: (pointScales, spreadPoints) => e => {
 		let el = e.target
 		if (el.tagName === 'circle') {
 			el = el.parentNode
@@ -17,10 +18,13 @@ const mapDispatchToProps = dispatch => ({
 		}
 		const {top, left} = offset(el)
 		const {clientX, clientY} = e
+		const actionType = spreadPoints ? 'CHART_POINT_CLICKED_SPREAD' : 'CHART_POINT_CLICKED'
 		dispatch({
-			type: 'CHART_POINT_CLICKED',
-			x: clientX - left,
-			y: clientY - top
+			type: actionType,
+			x: pointScales.x.invert(clientX - left),
+			y: pointScales.y.invert(clientY - top),
+			dx: Math.abs(pointScales.x.invert(1) - pointScales.x.invert(0)),
+			dy: Math.abs(pointScales.y.invert(1) - pointScales.y.invert(0))
 		})
 	},
 	pointDeleted: id => e => {
@@ -34,7 +38,9 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
 	chartData: state.chartData,
-	chartDimensions: state.config.chartDimensions
+	chartDimensions: state.config.chartDimensions,
+	labels: state.config.labels,
+	spreadPoints: state.config.spreadPoints
 })
 
 const MainChart = React.createClass({
@@ -42,11 +48,24 @@ const MainChart = React.createClass({
 	handleContextClick: e => e.preventDefault(),
 
 	render: function() {
-		return (
-			<svg id="main-chart" className="main-chart" height="400px" width="400px" onClick={this.props.pointClicked} onContextMenu={this.handleContextClick}>
-				{this.props.chartData.map((pointData, i) => (<ChartPoint key={i} pointDeleted={this.props.pointDeleted(pointData.id)} {...pointData}/>))
+		const {height, width} = this.props.chartDimensions
+		const {labels} = this.props
+		const pointScales = getConvertedScales(this.props.chartDimensions)
+		const spreadPoints = this.props.spreadPoints
+		const transformPoints = (pointData, i) => {
+			const transformedPointData = {
+				x: pointScales.x(pointData.x),
+				y: pointScales.y(pointData.y)
 			}
-			<ChartAxes chartDimensions={this.props.chartDimensions}/>
+			const transformedPoint = Object.assign({}, pointData, transformedPointData)
+			return (<ChartPoint key={i} pointDeleted={this.props.pointDeleted(transformedPoint.id)} {...transformedPoint}/>)
+		}
+		return (
+			<svg id="main-chart" className="main-chart" height={`${height}px`} width={`${width}px`} onClick={this.props.pointClicked(pointScales, spreadPoints)} onContextMenu={this.handleContextClick}>
+				{this.props.chartData.map(transformPoints)}
+				<text textAnchor="middle" transform={`translate(${width / 2}, ${height - 5})`}>{labels.x}</text>
+				<text textAnchor="middle" transform={`translate(12, ${height / 2})rotate(-90)`}>{labels.y}</text>
+				<ChartAxes chartDimensions={this.props.chartDimensions}/>
 			</svg>
 		)
 	}

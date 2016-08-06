@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 import JsonWindow from './JsonWindow.jsx'
+import getConvertedScale from '../utils/get-converted-scale'
 
 const buttonStyle = {
 	margin: '0 3px'
@@ -21,7 +22,7 @@ const mapDispatchToProps = dispatch => ({
 const DataConfigBar = ({chartData, toggleJsonWindow, showJsonWindow}) => {
 	return (
 		<div className="data-config-bar">
-			<RaisedButton label="Show JSON" primary={true} onClick={toggleJsonWindow} style={buttonStyle} />
+			<RaisedButton label={showJsonWindow ? 'Hide JSON' : 'Show JSON'} primary={true} onClick={toggleJsonWindow} style={buttonStyle} />
 			<RaisedButton label="Download CSV" primary={true} style={buttonStyle} />
 			{showJsonWindow ? <JsonWindow chartData={chartData} keysToShow={['x', 'y']} /> : null}
 		</div>
