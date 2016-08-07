@@ -21,6 +21,11 @@
 	flex : 1;
 }
 
+.instructions {
+	color: #666;
+	margin-top: 20px;
+}
+
 @media (max-width: 800px) {
 	.content{
 		flex-flow: column;
@@ -40,5 +45,6 @@
 	box-shadow: inset 0px 0px 4px -1px rgba(68,68,68,1);
 	padding: 10px 5px;
 	margin: 10px;
+	font-family: monospace;
 	background-color: #D7CCC8;
 }

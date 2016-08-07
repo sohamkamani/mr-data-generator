@@ -24,6 +24,7 @@ class App extends Component {
 						<ChartConfigBar/>
 						<div className="main-chart-container">
 							<MainChart/>
+							<div className="instructions">Click anywhere on the chart to draw points. Right click on any point to remove it</div>
 						</div>
 					</div>
 					<DataConfigBar/>

@@ -31,6 +31,8 @@ const chartData = (state = [], action) => {
 		return [...state, ...getSpreadPoints(action, getNewId(state))]
 	case 'DELETE_CHART_POINT':
 		return state.filter(point => point.id !== action.id)
+	case 'CLEAR_ALL_POINTS':
+		return []
 	default:
 		return state
 	}

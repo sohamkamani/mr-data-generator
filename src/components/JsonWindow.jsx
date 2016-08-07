@@ -1,5 +1,4 @@
 import React from 'react'
-import pick from 'lodash/pick'
 
 const JsonWindow = ({chartData}) => {
 
