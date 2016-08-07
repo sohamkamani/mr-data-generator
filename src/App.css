@@ -7,6 +7,10 @@
 	text-align: center;
 }
 
+.title-bar{
+	text-align: center;
+}
+
 .primary-container{
 	flex : 2;
 	display: flex;
