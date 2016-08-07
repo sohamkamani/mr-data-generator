@@ -7,9 +7,29 @@
 	text-align: center;
 }
 
+.primary-container{
+	flex : 2;
+	display: flex;
+}
+
 .data-config-bar, .main-chart-container, .chart-config-bar {
 	padding : 10px;
 	flex : 1;
+}
+
+@media (max-width: 800px) {
+	.content{
+		flex-flow: column;
+	}
+}
+
+@media (max-width: 400px) {
+	.content{
+		flex-flow: column;
+	}
+	.primary-container{
+		flex-flow: column-reverse;
+	}
 }
 
 .json-window{

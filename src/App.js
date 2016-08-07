@@ -11,9 +11,11 @@ class App extends Component {
 			<div className="App">
 				<AppBar title="My Data Generator" iconClassNameRight="muidocs-icon-navigation-expand-more"/>
 				<div className="content">
-					<ChartConfigBar/>
-					<div className="main-chart-container">
-						<MainChart/>
+					<div className="primary-container">
+						<ChartConfigBar/>
+						<div className="main-chart-container">
+							<MainChart/>
+						</div>
 					</div>
 					<DataConfigBar/>
 				</div>
