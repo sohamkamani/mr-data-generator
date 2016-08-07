@@ -1,50 +1,74 @@
-
-.content{
-	display: flex;
+.content {
+		display: flex;
 }
-
-.main-chart-container{
-	text-align: center;
+.main-chart-container {
+		text-align: center;
 }
-
-.title-bar{
-	text-align: center;
+.title-bar {
+		text-align: center;
 }
-
-.primary-container{
-	flex : 2;
-	display: flex;
+.primary-container {
+		flex: 2;
+		display: flex;
 }
-
 .data-config-bar, .main-chart-container, .chart-config-bar {
-	padding : 10px;
-	flex : 1;
+		padding: 10px;
+		margin: 0 auto;
 }
-
+.main-chart-container{
+	width: 60%;
+}
+.chart-config-bar{
+	width: 28%;
+}
+.data-config-bar {
+		display: flex;
+		flex-flow: column;
+		width: 33%;
+}
 .instructions {
-	color: #666;
-	margin-top: 20px;
+		color: #666;
+		margin-top: 20px;
 }
-
 @media (max-width: 800px) {
-	.content{
-		flex-flow: column;
-	}
+		.content {
+				flex-flow: column;
+		}
+		.main-chart-container{
+			width: 60%;
+		}
+		.chart-config-bar{
+			width: 40%;
+		}
+		.data-config-bar{
+			width: 100%;
+		}
 }
-
 @media (max-width: 400px) {
-	.content{
-		flex-flow: column;
-	}
-	.primary-container{
-		flex-flow: column-reverse;
-	}
+		.content {
+				flex-flow: column;
+		}
+		.primary-container {
+				flex-flow: column-reverse;
+		}
+		.main-chart-container{
+			width: 100%;
+		}
+		.chart-config-bar{
+			width: 100%;
+		}
+		.data-config-bar{
+			width: 100%;
+		}
 }
-
-.json-window{
-	box-shadow: inset 0px 0px 4px -1px rgba(68,68,68,1);
-	padding: 10px 5px;
-	margin: 10px;
-	font-family: monospace;
-	background-color: #D7CCC8;
+.json-window {
+		box-shadow: inset 0px 0px 4px -1px rgba(68, 68, 68, 1);
+		padding: 10px 5px;
+		margin: 10px;
+		font-family: monospace;
+		background-color: #D7CCC8;
+		word-wrap: break-word;
+		flex: 1;
+		flex-grow: 0;
+		overflow-wrap: break-word;
 }

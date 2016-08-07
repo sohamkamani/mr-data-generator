@@ -2,6 +2,7 @@
   "name": "chart-data-generator",
   "version": "0.0.1",
   "private": true,
+	"homepage": "http://www.sohamkamani.com/mr-data-generator/",
   "devDependencies": {
     "autoprefixer": "6.3.7",
     "babel-core": "6.11.4",

@@ -43,8 +43,10 @@ const downloadCsv = (jsonData) => () => {
 const DataConfigBar = ({chartData, toggleJsonWindow, showJsonWindow, transformLabels}) => {
 	return (
 		<div className="data-config-bar">
+			<div>
 			<RaisedButton label={showJsonWindow ? 'Hide JSON' : 'Show JSON'} primary={true} onClick={toggleJsonWindow} style={buttonStyle} />
 			<RaisedButton label="Download CSV" primary={true} style={buttonStyle} onClick={downloadCsv(transformLabels(chartData))} />
+			</div>
 			{showJsonWindow ? <JsonWindow chartData={transformLabels(chartData)} keysToShow={['x', 'y']} /> : null}
 		</div>
 	)
