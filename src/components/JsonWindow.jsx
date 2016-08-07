@@ -1,7 +1,7 @@
 import React from 'react'
 import pick from 'lodash/pick'
 
-const JsonWindow = ({chartData, keysToShow, pointScales}) => {
+const JsonWindow = ({chartData, keysToShow}) => {
 
 	return (
 		<div className="json-window">

@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
 import JsonWindow from './JsonWindow.jsx'
-import getConvertedScale from '../utils/get-converted-scale'
 
 const buttonStyle = {
 	margin: '0 3px'
