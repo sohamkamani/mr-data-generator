@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDom from 'react-dom'
 
 const d3 = require('d3-selection')
+
+const humanFormat = require('human-format')
 import { scaleLinear } from 'd3-scale'
 import { axisLeft, axisBottom } from 'd3-axis'
 
@@ -17,7 +19,7 @@ const ChartAxes = React.createClass({
 			x: width - chartWidth
 		}
 		const marginProportionRight = 1 - marginProportionLeft
-		const {xUpper=100, xLower=0, yUpper=100, yLower=0} = this.props.chartDimensions
+		const {xUpper = 100, xLower = 0, yUpper = 100, yLower = 0} = this.props.chartDimensions
 
 		const scaleY = scaleLinear().domain([yUpper, yLower]).range([0, chartHeight])
 		const axisY = axisLeft(scaleY)
@@ -25,8 +27,8 @@ const ChartAxes = React.createClass({
 		const scaleX = scaleLinear().domain([xLower, xUpper]).range([0, chartWidth])
 		const axisX = axisBottom(scaleX)
 
-		axisX.ticks(10)
-		axisY.ticks(10)
+		axisX.ticks(10).tickFormat(humanFormat)
+		axisY.ticks(10).tickFormat(humanFormat)
 
 		const axisElement = d3.select(el).append('g')
 
@@ -38,12 +40,12 @@ const ChartAxes = React.createClass({
 		this.scaleX = scaleX
 	},
 	componentDidUpdate() {
-		const {xUpper=100, xLower=0, yUpper=100, yLower=0} = this.props.chartDimensions
+		const {xUpper = 100, xLower = 0, yUpper = 100, yLower = 0} = this.props.chartDimensions
 		const {scaleX, scaleY, xAxis, yAxis} = this
 		scaleX.domain([xLower, xUpper])
 		scaleY.domain([yUpper, yLower])
-		const axisY = axisLeft(scaleY)
-		const axisX = axisBottom(scaleX)
+		const axisY = axisLeft(scaleY).tickFormat(humanFormat)
+		const axisX = axisBottom(scaleX).tickFormat(humanFormat)
 		yAxis.call(axisY)
 		xAxis.call(axisX)
 	},
