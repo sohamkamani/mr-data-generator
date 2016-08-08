@@ -2,5 +2,13 @@
   "ecmaVersion": 6,
   "libs": [
     "browser"
-  ]
+  ],
+	"plugins": {
+    "modules": {},
+    "es_modules": {},
+    "doc_comment": {
+      "fullDocs": true
+    },
+		"node" :{}
+  }
 }
