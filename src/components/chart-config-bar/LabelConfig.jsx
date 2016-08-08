@@ -3,7 +3,7 @@ import TextField from 'material-ui/TextField'
 
 const textFieldStyle = {
 	minWidth: '50px',
-	width: '100%'
+	width: '90%'
 }
 
 const LabelConfig = ({labelChange}) => {

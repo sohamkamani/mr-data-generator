@@ -12,7 +12,7 @@
 		display: flex;
 }
 .data-config-bar, .main-chart-container, .chart-config-bar {
-		padding: 10px;
+		padding-left: 10px;
 		margin: 0 auto;
 }
 .main-chart-container{
@@ -52,13 +52,19 @@
 				flex-flow: column-reverse;
 		}
 		.main-chart-container{
-			width: 100%;
+			width: 90%;
+			padding: 0;
+			margin: auto;
 		}
 		.chart-config-bar{
-			width: 100%;
+			width: 90%;
+			padding: 0;
+			margin: auto;
 		}
 		.data-config-bar{
-			width: 100%;
+			width: 90%;
+			padding: 10px 0;
+			margin: auto;
 		}
 }
 .json-window {
