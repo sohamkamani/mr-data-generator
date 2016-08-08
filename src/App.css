@@ -25,6 +25,7 @@
 		display: flex;
 		flex-flow: column;
 		width: 33%;
+		padding: 15px 0;
 }
 .instructions {
 		color: #666;
