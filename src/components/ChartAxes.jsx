@@ -7,6 +7,13 @@ const humanFormat = require('human-format')
 import { scaleLinear } from 'd3-scale'
 import { axisLeft, axisBottom } from 'd3-axis'
 
+const formatTicks = value => {
+	if (value >= 0) {
+		return humanFormat(value)
+	}
+	return '-' + humanFormat(Math.abs(value))
+}
+
 const ChartAxes = React.createClass({
 	componentDidMount() {
 		const el = ReactDom.findDOMNode(this)
@@ -27,8 +34,8 @@ const ChartAxes = React.createClass({
 		const scaleX = scaleLinear().domain([xLower, xUpper]).range([0, chartWidth])
 		const axisX = axisBottom(scaleX)
 
-		axisX.ticks(10).tickFormat(humanFormat)
-		axisY.ticks(10).tickFormat(humanFormat)
+		axisX.ticks(10).tickFormat(formatTicks)
+		axisY.ticks(10).tickFormat(formatTicks)
 
 		const axisElement = d3.select(el).append('g')
 
@@ -44,8 +51,8 @@ const ChartAxes = React.createClass({
 		const {scaleX, scaleY, xAxis, yAxis} = this
 		scaleX.domain([xLower, xUpper])
 		scaleY.domain([yUpper, yLower])
-		const axisY = axisLeft(scaleY).tickFormat(humanFormat)
-		const axisX = axisBottom(scaleX).tickFormat(humanFormat)
+		const axisY = axisLeft(scaleY).tickFormat(formatTicks)
+		const axisX = axisBottom(scaleX).tickFormat(formatTicks)
 		yAxis.call(axisY)
 		xAxis.call(axisX)
 	},
