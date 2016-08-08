@@ -4,6 +4,7 @@ import './App.css'
 import MainChart from './components/MainChart.jsx'
 import DataConfigBar from './components/DataConfigBar.jsx'
 import ChartConfigBar from './components/ChartConfigBar.jsx'
+import Tooltip from './components/Tooltip.jsx'
 import githubLogo from './github-logo.svg'
 import ActionHome from 'material-ui/svg-icons/action/home'
 
@@ -24,6 +25,7 @@ class App extends Component {
 						<ChartConfigBar/>
 						<div className="main-chart-container">
 							<MainChart/>
+							<Tooltip/>
 							<div className="instructions">Click anywhere on the chart to draw points. Right click on any point to remove it</div>
 						</div>
 					</div>

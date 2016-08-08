@@ -33,6 +33,25 @@ const mapDispatchToProps = dispatch => ({
 			type: 'DELETE_CHART_POINT',
 			id
 		})
+	},
+
+	mouseOverPoint: ({cx, cy}) => e => {
+		const {clientX, clientY} = e
+		dispatch({
+			type: 'MOUSE_OVER_POINT',
+			x: clientX,
+			y: clientY,
+			cx,
+			cy
+		})
+	},
+	mouseOutPoint: e => {
+		const {clientX, clientY} = e
+		dispatch({
+			type: 'MOUSE_OUT_POINT',
+			x: clientX,
+			y: clientY
+		})
 	}
 })
 
@@ -58,7 +77,7 @@ const MainChart = React.createClass({
 				y: pointScales.y(pointData.y)
 			}
 			const transformedPoint = Object.assign({}, pointData, transformedPointData)
-			return (<ChartPoint key={i} pointDeleted={this.props.pointDeleted(transformedPoint.id)} {...transformedPoint}/>)
+			return (<ChartPoint key={i} pointDeleted={this.props.pointDeleted(transformedPoint.id)} mouseOver={this.props.mouseOverPoint} mouseOut={this.props.mouseOutPoint} {...transformedPoint}/>)
 		}
 		return (
 			<svg id="main-chart" className="main-chart" height={`${height}px`} width={`${width}px`} onClick={this.props.pointClicked(pointScales, spreadPoints)} onContextMenu={this.handleContextClick}>
